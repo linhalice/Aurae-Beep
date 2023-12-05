@@ -1,4 +1,8 @@
-﻿using NAudio.Wave;
+﻿using Microsoft.VisualBasic.Devices;
+using NAudio.Wave;
+using System.Diagnostics;
+using System.Media;
+using System.Reflection;
 
 namespace Aurae_Beep
 {
@@ -11,14 +15,18 @@ namespace Aurae_Beep
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            SaveResourceToFile("Ring.mp3");
+
+
+
             Thread thread = new Thread(() =>
             {
                 while (true)
                 {
-                    string audioFilePath = "Audio.mp3";
+                    
                     for (int i = 0; i < 3; i++)
                     {
-                        PlayAudio(audioFilePath);
+                        PlayAudio("Ring.mp3");
                     }
 
                     int secondsInAnHour = 3600;
@@ -60,6 +68,12 @@ namespace Aurae_Beep
             {
                 Console.WriteLine($"Lỗi khi phát âm thanh: {ex.Message}");
             }
+        }
+
+        public static void SaveResourceToFile(string filename)
+        {
+            byte[] resourceData = Aurae_Beep.Resource1.Ring;
+            File.WriteAllBytes(filename, resourceData);
         }
     }
 }
