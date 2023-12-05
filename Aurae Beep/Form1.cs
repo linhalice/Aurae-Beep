@@ -17,8 +17,6 @@ namespace Aurae_Beep
         {
             SaveResourceToFile("Ring.mp3");
 
-
-
             Thread thread = new Thread(() =>
             {
                 while (true)
@@ -30,8 +28,7 @@ namespace Aurae_Beep
                     }
 
                     int secondsInAnHour = 3600;
-                    Console.WriteLine("Bắt đầu đếm ngược từng giây trong một giờ:");
-
+                    
                     for (int i = secondsInAnHour; i > 0; i--)
                     {
                         this.Invoke(new Action(() =>
@@ -39,10 +36,8 @@ namespace Aurae_Beep
                             Console.WriteLine($"Còn lại {i} giây.");
                             label1.Text = $"Còn lại {i} giây.";
                         }));
-                        Thread.Sleep(1000); // Đợi 1 giây trước khi đếm tiếp.
+                        Thread.Sleep(1000);
                     }
-
-                    Console.WriteLine("Kết thúc đếm ngược.");
                 }
             });
             thread.IsBackground = true;
